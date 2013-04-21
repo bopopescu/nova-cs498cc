@@ -1439,7 +1439,8 @@ class API(base.Base):
                     instance['numprocs'] = int(f.read())
             except IOError:
                 instance['numprocs'] = "NOTSUPP"        
-                LOG.info(_('rse module not loaded '),instance=instance)
+                LOG.info(_('rse module not loaded for instance %s'),
+                         instance['name'])
             ##
             instances.append(instance)
 
