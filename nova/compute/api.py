@@ -1432,6 +1432,15 @@ class API(base.Base):
             instance = dict(inst_model.iteritems())
             # NOTE(comstud): Doesn't get returned by iteritems
             instance['name'] = inst_model['name']
+            ##ZAK 
+            #We don't want to hammer the DB so populate this one realtime
+            try:
+                with open('/proc/rse/numprocs','r') as f:
+                    instance['numprocs'] = int(f.read())
+            except IOError:
+                instance['numprocs'] = "NOTSUPP"        
+                LOG.info(_('rse module not loaded ',instance=instance),
+            ##
             instances.append(instance)
 
         return instances
