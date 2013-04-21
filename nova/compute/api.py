@@ -1434,11 +1434,11 @@ class API(base.Base):
             instance['name'] = inst_model['name']
             ##ZAK 
             #We don't want to hammer the DB so populate this one realtime
+            instance['numprocs'] = "NOTSUPP" #unsupported by default
             try:
                 with open('/proc/rse/numprocs','r') as f:
-                    instance['numprocs'] = int(f.read())
+                    instance['numprocs'] = f.read().rstrip()
             except IOError:
-                instance['numprocs'] = "NOTSUPP"        
                 LOG.info(_('rse module not loaded for instance %s'),
                          instance['name'])
             ##
