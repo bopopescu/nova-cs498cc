@@ -1436,7 +1436,7 @@ class API(base.Base):
             #We don't want to hammer the DB so populate this one realtime
             instance['numprocs'] = "NOTSUPP" #unsupported by default
             try:
-                with open('/proc/rse/numprocs','r') as f:
+                with open('/proc/rse/rsevm','r') as f:
                     instance['numprocs'] = f.readlines()[0].rstrip()
             except IOError:
                 LOG.info(_('rse module not loaded for instance %s'),
